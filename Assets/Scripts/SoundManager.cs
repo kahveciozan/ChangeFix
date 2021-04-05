@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource soundFX;
 
     [SerializeField]
-    private AudioClip correctSound, wrongSound;
+    private AudioClip correctSound, wrongSound, buttonSound;
 
 
     void Awake()
@@ -28,6 +28,13 @@ public class SoundManager : MonoBehaviour
     public void WrongSound()
     {
         soundFX.clip = wrongSound;
+        soundFX.Play();
+    }
+
+    // Sound of Right and Left Buttons
+    public void ButtonSound()
+    {
+        soundFX.clip = buttonSound;
         soundFX.Play();
     }
 

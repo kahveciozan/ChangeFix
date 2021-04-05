@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text totalScoreText;
     [SerializeField] GameObject RedCircles, GreenCircles;
     [SerializeField] Text scoreText;
-    private int score = 0;
 
+    private int score = 0;
     private int questionCount = 0;
 
     private void Start()
@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
         ts = Object.FindObjectOfType<TextScript>();
         bs = Object.FindObjectOfType<ButtonScript>();
         cm = Object.FindObjectOfType<CoinMove>();
-
-
     }
 
     public void PlayButton()
@@ -41,28 +39,22 @@ public class GameManager : MonoBehaviour
 
     public void CheckButton()
     {
+        bs.CheckButtonAnim();
+
         if (p1.random1 == p1.choosenNum1)
-        {
             p1.WinAnim();
-        }
         else
-        {
             p1.LostAnim();
-        }
 
         if (p2.random2 == p2.choosenNum2)
-        {
             p2.WinAnim();
-        }
         else
-        {
             p2.LostAnim();
-        }
 
         if(p1.random1 == p1.choosenNum1 && p2.random2 == p2.choosenNum2)
         {
             GreenCircles.transform.GetChild(questionCount).gameObject.SetActive(true);
-            score = score + 15;
+            score += 15;
             scoreText.text = score.ToString();
             cm.CoinWinEffect();
 
@@ -80,8 +72,7 @@ public class GameManager : MonoBehaviour
 
     }
 
- 
-
+    // UI Animations when Question Appears
     private void Animations()
     {
         ts.AnimationState();
@@ -91,10 +82,13 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Ask new Question
     IEnumerator PlayAgain()
     {
+       
         yield return new WaitForSeconds(1f);
 
+        ts.PlayAgain();
         p1.PlayAgain();
         p2.PlayAgain();
         bs.PlayAgain();
@@ -111,13 +105,13 @@ public class GameManager : MonoBehaviour
             
     }
 
-    // OnClick
+    // Game Restart - ButtonOnclick
     public void PlayAgainButton()
     {
         SceneManager.LoadScene("SampleScene");
     }
 
-    // OnCkick
+    // Quit Game - Button Onclick
     public void QuitButton()
     {
         Application.Quit();

@@ -13,7 +13,6 @@ public class Pano1 : MonoBehaviour
     public int choosenNum1;
 
     [SerializeField] public GameObject thick, cross;
-
     [SerializeField] private GameObject rightButton,leftButton;
 
     // Start is called before the first frame update
@@ -22,10 +21,12 @@ public class Pano1 : MonoBehaviour
         StartCoroutine(Start1());
     }
 
+    // Right Arrow - OnClick
     public void RightButton1()
     {
         if (isButtonActive && choosenNum1<14)
         {
+            SoundManager.instance.ButtonSound();
             isButtonActive = false;
             choosenNum1++;
             Debug.Log(choosenNum1);
@@ -50,10 +51,12 @@ public class Pano1 : MonoBehaviour
         
     }
 
+    // Left Arrow - OnClick
     public void LeftButton1()
     {
         if (isButtonActive && choosenNum1 > 0 )
         {
+            SoundManager.instance.ButtonSound();
             isButtonActive = false;
             choosenNum1--;
             Debug.Log(choosenNum1);
@@ -101,11 +104,8 @@ public class Pano1 : MonoBehaviour
         choosenNum1 = random1;
 
         transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
-
-        
+        transform.GetChild(1).gameObject.SetActive(false);    
     }
-
 
     public void AnimationState()
     {
@@ -121,7 +121,7 @@ public class Pano1 : MonoBehaviour
         GetComponent<RectTransform>().DOScale(1, 1f);
     }
 
-
+    // Mix planets locations
     IEnumerator Mix()
     {
         choosenNum1 = Random.Range(0, 15);
@@ -165,6 +165,7 @@ public class Pano1 : MonoBehaviour
         cross.GetComponent<RectTransform>().DOScale(1f, 0.5f);
     }
 
+    // Move to Default Position
     private void SetDefaultPosition()
     {
         for (int i = 0; i < 15; i++)
@@ -175,12 +176,11 @@ public class Pano1 : MonoBehaviour
         }
     }
 
+    // Ask new question ( Switching between questions)
     public void PlayAgain()
     {
         SetDefaultPosition();
         StartCoroutine(Start1());
-        
-
     }
 
 

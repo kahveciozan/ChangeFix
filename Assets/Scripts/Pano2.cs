@@ -22,10 +22,12 @@ public class Pano2 : MonoBehaviour
         choosenNum2 = random2;
     }
 
+    // Right Arrow - OnClick
     public void RightButton2()
     {
         if (isButtonActive && choosenNum2 < 14)
         {
+            SoundManager.instance.ButtonSound();
             isButtonActive = false;
             choosenNum2++;
             Debug.Log(choosenNum2);
@@ -49,10 +51,12 @@ public class Pano2 : MonoBehaviour
         }
     }
 
+    // Left Arrow - OnClick
     public void LeftButton2()
     {
         if (isButtonActive && choosenNum2 > 0)
         {
+            SoundManager.instance.ButtonSound();
             isButtonActive = false;
             choosenNum2--;
             Debug.Log(choosenNum2);
@@ -146,7 +150,7 @@ public class Pano2 : MonoBehaviour
         //Debug.Log(choosenNum2);
     }
 
-
+    // Win Animation
     public void WinAnim()
     {
         Vector3 temp = new Vector3(1, 1, 1);
@@ -154,6 +158,8 @@ public class Pano2 : MonoBehaviour
         thick.SetActive(true);
         thick.GetComponent<RectTransform>().DOScale(1f, 0.5f);
     }
+
+    //Lost Animation
     public void LostAnim()
     {
         Vector3 temp = new Vector3(1, 1, 1);
@@ -162,6 +168,7 @@ public class Pano2 : MonoBehaviour
         cross.GetComponent<RectTransform>().DOScale(1f, 0.5f);
     }
 
+    // Move to Default Position
     private void SetDefaultPosition()
     {
         for (int i = 0; i < 15; i++)
@@ -172,6 +179,7 @@ public class Pano2 : MonoBehaviour
         }
     }
 
+    // Ask new question ( Switching between questions)
     public void PlayAgain()
     {
         SetDefaultPosition();
